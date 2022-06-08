@@ -29,7 +29,7 @@ static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, 
 		return -EFAULT;			
 	}
 	if( *ppos < 0 || *ppos > len ) { return -EBADFD; }
-	if( *ppos == len ) { return 0; }
+	if( *ppos == len || len == 0 ) { return 0; }
 	
 	toCopy = len - *ppos;
 	
@@ -45,6 +45,7 @@ static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, 
 			atomic_set ( &core.rHead, ATRR + 1 );
 		}
 	}
+	printk(KERN_ERR "B: %s\n", buffer );
 	res=copy_to_user ( ubuf, buffer, toCopy );
 	
 	if(res) {
