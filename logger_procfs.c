@@ -42,7 +42,7 @@ static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, 
 		} else {
 			buffer [ i ] = core.payload [ ATRR ];
 			printk(KERN_ERR "Byte: %d\n", (int)buffer[ i ] );
-			atomic_set ( &core.rHead, ATRR + 1 );
+			atomic_set ( &core.rHead, ( ATRR + 1 ) % core.capacity );
 		}
 	}
 	printk(KERN_ERR "B: %s\n", buffer );
