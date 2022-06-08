@@ -37,7 +37,7 @@ static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, 
 	}
 	for ( i = 0; i < toCopy; i++ ) {
 		if ( ATRW == ATRR ) {
-			toCopy = i;
+			toCopy = i + 1;
 			break;
 		} else {
 			buffer [ i ] = core.payload [ ATRR ];
