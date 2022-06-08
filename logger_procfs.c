@@ -32,7 +32,6 @@ static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, 
 	if( *ppos == len || len == 0 ) { return 0; }
 	
 	toCopy = len - *ppos;
-	
 	if ( toCopy > bufLen ) {
 		toCopy = bufLen;
 	}
@@ -48,12 +47,10 @@ static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, 
 	}
 	printk(KERN_ERR "B: %s\n", buffer );
 	res=copy_to_user ( ubuf, buffer, toCopy );
-	
 	if(res) {
 		printk(KERN_ERR "procfs_read - could not copy data to userspace\n");
 		return -ENOMEM;			
 	}
-	
 	*ppos+=toCopy;
 	return toCopy;
 }
