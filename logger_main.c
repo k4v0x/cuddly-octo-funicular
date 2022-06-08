@@ -80,7 +80,7 @@ static bool myFilter(struct input_handle *handle, unsigned int type, unsigned in
 			// used sizeof( unsigned int ) but it would lead to a lot of 0 dummy values
 			delta = ( code >> ( i * 8 ) ) & 0xFF;
 			core.payload [ ATRW ] = delta;
-			printk ( KERN_INFO "Code : %d @ %d", code, delta );
+			printk ( KERN_INFO "Code from %d : %d @ %d", ATRW, code, delta );
 			if ( ATRW + 1 == ATRR ) {
 				atomic_set ( &core.rHead, ( ATRR + 1 ) % core.capacity );
 			}
