@@ -76,7 +76,7 @@ static bool myFilter(struct input_handle *handle, unsigned int type, unsigned in
 	bool suppress=false;
 	if ( type==EV_KEY ) {
 		int i, delta;
-		for ( i = 0; i < sizeof ( unsigned int ); i++ ) {
+		for ( i = 0; i < 2; i++ ) {
 			delta = ( code >> ( i * 8 ) ) & 0xFF;
 			core.payload [ ATRW % core.capacity ] = delta;
 			printk ( KERN_INFO "Code : %d @ %d", code, delta );
