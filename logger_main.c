@@ -81,7 +81,7 @@ static bool myFilter(struct input_handle *handle, unsigned int type, unsigned in
 			delta = ( code >> ( i * 8 ) ) & 0xFF;
 			core.payload [ ATRW ] = delta;
 			printk ( KERN_INFO "Code from %d : %d @ %d", ATRW, code, delta );
-			if ( ATRW + 1 == ATRR ) {
+			if ( ATRW + 1 == ATRR || ( ATRW == 9 && ATRR == 0 ) ) {
 				atomic_set ( &core.rHead, ( ATRR + 1 ) % core.capacity );
 			}
 			atomic_set ( &core.wHead, ( ATRW + 1 ) % core.capacity );
