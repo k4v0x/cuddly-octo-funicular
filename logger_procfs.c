@@ -20,10 +20,10 @@ static struct proc_ops file_ops={
 static ssize_t procfs_read(struct file *file, char __user *ubuf, size_t bufLen, loff_t *ppos) {
 	unsigned long res;
 	ssize_t len = ( ATRW + core.capacity - ATRR ) % core.capacity - 1;
-	printk(KERN_ERR "ATR WR %d %d @ %d\n", ATRW, ATRR, len );
 	ssize_t toCopy;
 	int i;
 	char buffer[ 10 ];
+	printk(KERN_ERR "ATR WR %d %d @ %d\n", ATRW, ATRR, len );
 	
 	if ( file==NULL || ubuf==NULL || ppos==NULL ) {
 		return -EFAULT;			
